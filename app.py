@@ -6,7 +6,7 @@ st.title("ChatGPT-like clone")
 
 #openai.api_key = "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"
 
-client = OpenAI(api_key="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")
+client = OpenAI()
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
