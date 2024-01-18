@@ -68,8 +68,8 @@ if prompt := st.chat_input("What is up?"):
                 {"role": m["role"], "content": m["content"]}
                 for m in st.session_state.messages
             ],
-            #functions=function_descriptions,
-            #function_call="auto",
+            functions=function_descriptions,
+            function_call="auto",
             stream=True,
         ):
             full_response += (response.choices[0].delta.content or "")
