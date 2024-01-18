@@ -70,9 +70,10 @@ if prompt := st.chat_input("What is up?"):
             ],
             functions=function_descriptions,
             function_call="auto",
-            stream=True,
+            #stream=True,
         ):
-            full_response += (response.choices[0].delta.content or "")
+            #full_response += (response.choices[0].delta.content or "")
+            full_response += (response.choices[0].message or "")
             message_placeholder.markdown(full_response + "▌")
         message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "assistant", "content": full_response})
