@@ -45,7 +45,7 @@ function_descriptions = [
 ]
 
 if "openai_model" not in st.session_state:
-    st.session_state["openai_model"] = "gpt-3.5-turbo"
+    st.session_state["openai_model"] = "gpt-3.5-turbo-0613"
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -76,4 +76,4 @@ if prompt := st.chat_input("What is up?"):
             #full_response += (response.choices[0].message or "")
             message_placeholder.markdown(full_response + "▌")
         message_placeholder.markdown(full_response)
-    st.session_state.messages.append({"role": "assistant", "content": full_response})
+    st.session_state.messages.append({"role": "user", "content": full_response})
