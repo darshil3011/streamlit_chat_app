@@ -21,7 +21,7 @@ def get_flight_info(loc_origin, loc_destination):
         "flight": "KL643",
     }
 
-    return json.dumps(flight_info)
+    return str(json.dumps(flight_info))
 
 function_descriptions = [
     {
