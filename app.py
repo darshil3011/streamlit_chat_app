@@ -65,7 +65,7 @@ if prompt := st.chat_input("What is up?"):
         full_response = ""
         
         if 'flight status' in prompt:
-            full_response += 'Flight status is on time'
+            full_response += get_flight_info('AHD', 'SFO')
         else:
             for response in client.chat.completions.create(
                 model=st.session_state["openai_model"],
