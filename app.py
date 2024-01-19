@@ -60,12 +60,13 @@ if prompt := st.chat_input("What is up?"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-
+        
+        message_placeholder = st.empty()
+        full_response = ""
+        
         if 'flight status' in prompt:
             full_response += 'Flight status is on time'
         else:
-            message_placeholder = st.empty()
-            full_response = ""
             for response in client.chat.completions.create(
                 model=st.session_state["openai_model"],
                 messages=[
