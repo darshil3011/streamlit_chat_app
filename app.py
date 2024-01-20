@@ -57,7 +57,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 if prompt := st.chat_input("What are you looking for today ?"):
-    st.session_state.messages.append({"role":"user", "content": 'You are a shopping assistant. I will put down a query, based on that query ask me questions to know my preferences and based on that generate following API parameters - product, colour, size, additional details, price.'
+    st.session_state.messages.append({"role":"user", "content": 'You are a shopping assistant. I will put down a query, based on that query ask me questions to know my preferences and based on that generate following API parameters - product, colour, size, additional details, price.'})
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
