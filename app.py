@@ -51,7 +51,7 @@ if "openai_model" not in st.session_state:
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
-    st.session_state.messages.append({"role":"user", "content": 'You are a shopping assistant. I will put down a query, based on that query ask me questions to know my preferences and based on that generate following API parameters - product, colour, size, additional details, price.'})
+    st.session_state.messages.append({"role":"user", "content": 'You are a shopping assistant. I will put down a query, based on that query ask me questions to know my preferences and based on that generate following API parameters - product, colour, size, additional details, price. Keep the parameters exactly same and dont mention about API to the user. Just ask questions'})
 
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
