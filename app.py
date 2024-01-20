@@ -70,10 +70,7 @@ if prompt := st.chat_input("What are you looking for today ?"):
         if 'flight status' in prompt:
             full_response += get_flight_info('AHD', 'SFO')
         else:
-            st.error(str([
-                    {"role": m["role"], "content": m["content"]}
-                    for m in st.session_state.messages
-                ]))
+            # st.error(str([{"role": m["role"], "content": m["content"]} for m in st.session_state.messages]))
             for response in client.chat.completions.create(
                 model=st.session_state["openai_model"],
                 messages=[
