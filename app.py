@@ -11,19 +11,20 @@ openai_api_key = st.sidebar.text_input('OpenAI API Key')
 
 client = OpenAI(api_key=openai_api_key)
 
-def get_flight_info(loc_origin, loc_destination):
-    """Get flight information between two locations."""
+def get_rag_response(search_params):
+    """Get rag response from traversaal API"""
 
-    # Example output returned from an API or database
-    flight_info = {
-        "loc_origin": loc_origin,
-        "loc_destination": loc_destination,
-        "datetime": str(datetime.now() + timedelta(hours=2)),
-        "airline": "KLM",
-        "flight": "KL643",
+    url = "https://api-ares.traversaal.ai/d/predict"
+
+    payload = { "data": [search_params] }
+    headers = {
+      "x-api-key": "85R0T2mNbg3GqEo3dhMvt1wElGGTGZSk3aMGLYSV",
+      "content-type": "application/json"
     }
+    
+    response = requests.post(url, json=payload, headers=headers)
 
-    return str(json.dumps(flight_info))
+    return response
 
 function_descriptions = [
     {
@@ -70,8 +71,8 @@ if prompt := st.chat_input("What are you looking for today ?"):
         message_placeholder = st.empty()
         full_response = ""
         
-        if 'flight status' in prompt:
-            full_response += get_flight_info('AHD', 'SFO')
+        if 'Search Completed' in prompt:
+            full_response += get_rag_response()
         else:
             # st.error(str([{"role": m["role"], "content": m["content"]} for m in st.session_state.messages]))
             for response in client.chat.completions.create(
@@ -82,8 +83,11 @@ if prompt := st.chat_input("What are you looking for today ?"):
                 ],
                 stream=True,
             ):    
-                full_response += (response.choices[0].delta.content or "")
-                #full_response += (response.choices[0].message or "")
-                message_placeholder.markdown(full_response + "▌")
+                if 'Search Completed' in response:
+                    full_response += 'Got params for API Call'
+                else:
+                    full_response += (response.choices[0].delta.content or "")
+                    #full_response += (response.choices[0].message or "")
+                    message_placeholder.markdown(full_response + "▌")
         message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "user", "content": full_response})
