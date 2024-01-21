@@ -84,7 +84,7 @@ if prompt := st.chat_input("What are you looking for today ?"):
                 # if 'Search Completed' in response.choices[0].delta.content:
                 #     full_response += 'Got params for API Call'
                 # else:
-            full_response += str(response.choices[0].message)
+            full_response += str(response.choices[0].message.content)
             #full_response += (response.choices[0].message or "")
             message_placeholder.markdown(full_response + "▌")
         message_placeholder.markdown(full_response)
