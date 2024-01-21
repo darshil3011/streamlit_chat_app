@@ -3,6 +3,7 @@ import openai
 import streamlit as st
 from datetime import datetime, timedelta
 import json
+import requests
 
 st.title("ChatGPT-like clone")
 
