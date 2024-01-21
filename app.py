@@ -87,7 +87,9 @@ if prompt := st.chat_input("What are you looking for today ?"):
             
             chat_response = str(response.choices[0].message.content)
             if 'Search Completed' in chat_response:
-                full_response += 'API Call !'
+                api_response = get_rag_response(chat_response.split(' Search Completed')[1]):
+                full_response += str(api_response)
+                
             else:
                 full_response += str(response.choices[0].message.content)
                 #full_response += (response.choices[0].message or "")
