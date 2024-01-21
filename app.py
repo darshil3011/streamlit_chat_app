@@ -83,7 +83,7 @@ if prompt := st.chat_input("What are you looking for today ?"):
                 ],
                 stream=True,
             ):    
-                if 'Search Completed' in response:
+                if 'Search Completed' in response.choices[0].delta.content:
                     full_response += 'Got params for API Call'
                 else:
                     full_response += (response.choices[0].delta.content or "")
