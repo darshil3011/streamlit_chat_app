@@ -75,19 +75,17 @@ if prompt := st.chat_input("What are you looking for today ?"):
             full_response += get_rag_response()
         else:
             # st.error(str([{"role": m["role"], "content": m["content"]} for m in st.session_state.messages]))
-            for response in client.chat.completions.create(
+            response = client.chat.completions.create(
                 model=st.session_state["openai_model"],
                 messages=[
                     {"role": m["role"], "content": m["content"]}
                     for m in st.session_state.messages
-                ],
-                stream=True,
-            ):    
-                if 'Search Completed' in response.choices[0].delta.content:
-                    full_response += 'Got params for API Call'
-                else:
-                    full_response += (response.choices[0].delta.content or "")
-                    #full_response += (response.choices[0].message or "")
-                    message_placeholder.markdown(full_response + "▌")
+                ])    
+                # if 'Search Completed' in response.choices[0].delta.content:
+                #     full_response += 'Got params for API Call'
+                # else:
+            full_response += (response.choices[0].message)
+            #full_response += (response.choices[0].message or "")
+            message_placeholder.markdown(full_response + "▌")
         message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "user", "content": full_response})
