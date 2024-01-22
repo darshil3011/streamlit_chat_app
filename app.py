@@ -24,8 +24,9 @@ def get_rag_response(search_params):
     }
     
     response = requests.post(url, json=payload, headers=headers)
+    json_str = json.dumps(response.json(), indent=4)
 
-    return response.text()
+    return json_str
 
 function_descriptions = [
     {
