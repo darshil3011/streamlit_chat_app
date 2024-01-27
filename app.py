@@ -26,6 +26,7 @@ def get_rag_response(search_params):
     response = requests.post(url, json=payload, headers=headers)
     json_str = json.dumps(response.json(), indent=4)
 
+    '''
     response = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
@@ -35,7 +36,9 @@ def get_rag_response(search_params):
     )
     
     return response['choices'][0]['message']['content']
-
+    '''
+    return json_str
+    
 function_descriptions = [
     {
         "name": "get_flight_info",
