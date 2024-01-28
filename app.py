@@ -40,26 +40,6 @@ def get_rag_response(search_params):
     
     return json_str
     
-function_descriptions = [
-    {
-        "name": "get_flight_info",
-        "description": "Get flight information between two locations",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "loc_origin": {
-                    "type": "string",
-                    "description": "The departure airport, e.g. DUS",
-                },
-                "loc_destination": {
-                    "type": "string",
-                    "description": "The destination airport, e.g. HAM",
-                },
-            },
-            "required": ["loc_origin", "loc_destination"],
-        },
-    }
-]
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo-0613"
