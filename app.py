@@ -35,7 +35,7 @@ def get_rag_response(search_params):
       ]
     )
     
-    return rephrased_output
+    return rephrased_output.choices[0].message.content
 
 
 if "openai_model" not in st.session_state:
@@ -44,7 +44,7 @@ if "openai_model" not in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = []
     st.session_state.messages.append({"role":"user", "content": '''You are a shopping assistant. I will put down a query, based on that query ask me questions to 
-    know my preferences and based on that generate response in following format: "Search Completed. product: x, colour: x, size: x, additional details: x, price-range: x". Keep the parameters exactly same.
+    know my preferences and based on that generate response in following format: "Search Completed. user wants to buy product: x, colour: x, size: x, additional details: x, price-range: x". Keep the parameters exactly same.
     In the final response mention Search Completed and then API parameters. Dont add anything extra to the final response except "Search Completed". 
     Dont mention about API to the user. Just ask questions'''})
 
