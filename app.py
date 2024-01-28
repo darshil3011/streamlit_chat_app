@@ -38,7 +38,7 @@ def get_rag_response(search_params):
     return response['choices'][0]['message']['content']
     '''
     
-    return json_str
+    return json_str['data']
     
 
 if "openai_model" not in st.session_state:
