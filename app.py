@@ -24,7 +24,10 @@ def get_rag_response(search_params):
     }
     
     response = requests.post(url, json=payload, headers=headers)
-    json_str = json.dumps(response.json(), indent=4)
+    response_json = response.json()
+    response_text = response_json['data']['response_text']
+    
+    return response_text
 
     '''
     response = client.chat.completions.create(
@@ -37,9 +40,6 @@ def get_rag_response(search_params):
     
     return response['choices'][0]['message']['content']
     '''
-    
-    return json_str
-    
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo-0613"
